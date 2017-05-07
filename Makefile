@@ -19,3 +19,6 @@ record:
 	mode2 -d $(LIRC_DEVICE) | tee -a $(LIRC_DUMP)
 	sudo service lirc start
 
+send:
+	irsend SEND_ONCE ${ARG}
+
