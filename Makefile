@@ -1,5 +1,7 @@
 
-LIRCD_CONF = /etc/lirc/lircd.conf
+LIRC_DEVICE = /dev/lirc0
+LIRC_DUMP   = dump.log
+LIRCD_CONF  = /etc/lirc/lircd.conf
 
 .PHONY: update
 
@@ -11,4 +13,9 @@ $(LIRCD_CONF): lircd.conf
 
 apply: update $(LIRCD_CONF)
 	sudo service lirc restart
+
+record:
+	sudo service lirc stop
+	mode2 -d $(LIRC_DEVICE) | tee -a $(LIRC_DUMP)
+	sudo service lirc start
 
