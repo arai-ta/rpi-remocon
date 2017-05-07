@@ -7,7 +7,7 @@ update:
 	git pull
 
 $(LIRCD_CONF): lircd.conf
-	sudo $< $@
+	sudo cp -p $< $@
 
 apply: update $(LIRCD_CONF)
 	sudo service lirc restart
