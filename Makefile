@@ -3,7 +3,7 @@ LIRC_DEVICE = /dev/lirc0
 LIRC_DUMP   = dump.log
 LIRCD_CONF  = /etc/lirc/lircd.conf
 
-.PHONY: update
+.PHONY: update apply record send
 
 update:
 	git pull
@@ -16,7 +16,7 @@ apply: update $(LIRCD_CONF)
 
 record:
 	sudo service lirc stop
-	mode2 -d $(LIRC_DEVICE) | tee -a $(LIRC_DUMP)
+	mode2 -d $(LIRC_DEVICE) | tee $(LIRC_DUMP)
 	sudo service lirc start
 
 send:
