@@ -22,3 +22,6 @@ record:
 send:
 	irsend SEND_ONCE ${ARG}
 
+# start temporary git server
+serve:
+	pgrep -q -f "git daemon" || git daemon --export-all $(PWD) >/dev/null &
