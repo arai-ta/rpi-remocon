@@ -21,7 +21,7 @@ record-raw:
 
 record:
 	sudo service lirc stop
-	irrecord -n -d $(LIRC_DEVICE) rec.conf
+	irrecord -n -d $(LIRC_DEVICE) dump.conf
 	sudo service lirc start
 
 send:
