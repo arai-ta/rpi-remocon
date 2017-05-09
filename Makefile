@@ -14,9 +14,14 @@ $(LIRCD_CONF): lircd.conf
 apply: update $(LIRCD_CONF)
 	sudo service lirc restart
 
-record:
+record-raw:
 	sudo service lirc stop
 	mode2 -d $(LIRC_DEVICE) | tee $(LIRC_DUMP)
+	sudo service lirc start
+
+record:
+	sudo service lirc stop
+	irrecord -n -d $(LIRC_DEVICE) rec.conf
 	sudo service lirc start
 
 send:
