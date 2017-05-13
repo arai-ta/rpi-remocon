@@ -3,6 +3,8 @@ LIRC_DEVICE = /dev/lirc0
 LIRC_DUMP   = dump.log
 LIRCD_CONF  = /etc/lirc/lircd.conf
 
+GIT_DAEMON_CMD = git daemon --export-all --enable=receive-pack
+
 .PHONY: update apply record send
 
 update:
@@ -28,5 +30,5 @@ send:
 	irsend SEND_ONCE ${ARG}
 
 # start temporary git server
-serve:
-	pgrep -q -f "git daemon" || git daemon --export-all $(PWD) >/dev/null &
+server:
+	pgrep -q -f "git daemon" || $(GIT_DAEMON_CMD) $(PWD) >/dev/null &
